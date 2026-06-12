@@ -2,7 +2,7 @@ import requests
 import sys
 
 def test_backend():
-    base_url = "https://st-antonys-ayurvedics-ey2p.vercel.app/"
+    base_url = "https://st-antonys-ayurvedics-ey2p.vercel.app"
     
     print("🧪 Testing backend connection...")
     
