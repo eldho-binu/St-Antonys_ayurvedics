@@ -28,14 +28,14 @@ app.config['SESSION_PERMANENT'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=int(os.getenv('SESSION_DURATION_DAYS', 7)))
 
 # For Vercel, we need to handle sessions differently
-app.config['SESSION_COOKIE_DOMAIN'] = os.getenv('COOKIE_DOMAIN', None)
+app.config['SESSION_COOKIE_DOMAIN'] = None
 
 # CORS configuration - more permissive for production debugging
 CORS(
     app,
     origins=[
         "https://st-antonys-ayurvedics-ey2p.vercel.app",
-        "https://*.vercel.app",  # Allow all vercel subdomains
+          # Allow all vercel subdomains
         "http://localhost:3000", 
         "http://localhost:5173",
         "http://127.0.0.1:5173",
