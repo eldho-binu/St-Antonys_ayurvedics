@@ -19,6 +19,14 @@ load_dotenv()
 
 app = Flask(__name__)
 
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'https://st-antonys-ayurvedics-ey2p.vercel.app')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+    return response
+
 # Enhanced session configuration for Vercel deployment
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', secrets.token_hex(32))
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'  # Required for cross-origin
@@ -369,6 +377,12 @@ def refresh_token():
             'success': False,
             'error': 'Token refresh failed'
         }), 500
+@app.route('/cors-test')
+def cors_test():
+    return jsonify({
+        "success": True,
+        "message": "CORS test"
+    })
 
 @app.route('/api/auth/check', methods=['GET'])
 def check_auth():
