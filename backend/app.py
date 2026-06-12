@@ -55,13 +55,7 @@ CORS(
     expose_headers=["Set-Cookie"]
 )
 
-@app.after_request
-def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "https://st-antonys-ayurvedics-ey2p.vercel.app"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
-    return response
+
 
 # MongoDB Configuration
 MONGO_URI = os.getenv('MONGO_URI', 'mongodb+srv://works_new:works%40123@cluster0.kvjblkh.mongodb.net/')
@@ -338,12 +332,8 @@ def require_auth(f):
 
 # ==================== AUTH ROUTES ====================
 
-@app.route('/api/auth/login', methods=['POST', 'OPTIONS'])
-def login():
-    if request.method == 'OPTIONS':
-        return '', 200
 
-    # existing login code below
+
 
 @app.route('/api/auth/refresh', methods=['POST'])
 def refresh_token():
